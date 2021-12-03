@@ -1,0 +1,58 @@
+
+{% extends 'main-page/base.html' %}
+{% load static %}
+
+{% block title %}The Open Road{% endblock title %}
+
+{% block content %}
+<div class="header">
+
+    {% if user.is_staff %}
+      <a href="{% url 'admin:index' %}"><img src="/static/main-page/assets/logo.png" class='logo' alt="Logo"></a>
+    {% else %}
+      <img src="/static/main-page/assets/logo.png" class='logo' alt="Logo">
+    {% endif %}
+    <p class='user-data'>Logged in as: <a href="" class='prof-link'>{{user.username}}</a> </p>
+    
+    <a href="{% url 'logout' %}" class='log-out'>Log Out</a>
+</div>
+
+<div class='table-row'>
+
+    <div name='ctg' class="btn-group">
+        <p class='lb'>Categories</p>
+        <a class ='button-link' href="/home"><button >All</button></a>
+        {% if products %}
+          {% for product in products %}
+            <a class ='button-link  ' href="/home/{{product.name}}"><button>{{product.name}}</button></a>
+          {% endfor %}
+        {% endif %}
+
+    </div>
+
+
+  </div>
+
+
+
+<div class='grid'>
+  <div class="row">
+    
+  {%if queryset %}
+    {% for item in queryset %}
+      <div class="column" style="background-color:#10971785; border:1px solid black; box-shadow: 1px 5px 30px black;">
+        <img class='product' src="/media/{{item.photo}}">
+        <p>{{item.Product_Name}}</p>
+        <p>${{item.Price}}</p>
+      </div>
+    {% endfor %}
+
+  {% endif %}
+  {% if not queryset %}
+    <p class='empty' style='text-align:center; font-family:sans-serif; font-weight:bold;'>Businesses are empty!</p>
+  {% endif %}
+    
+  </div>
+</div>
+
+{% endblock content %}

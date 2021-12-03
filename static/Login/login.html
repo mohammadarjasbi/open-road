@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <link rel="icon" type="image/x-icon" href="/static/assets/favicon.png" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="static/Login/css/styles.css" rel="stylesheet" />
+    <title>Login</title>
+</head>
+<body>
+    
+    <div class='central-intro'>
+        <div class='central-intro-title'>
+            <img src="/static/assets/favicon.png" class='logo' alt="Logo">
+            <h1 class=title>The Open Road</h1>
+        </div>
+        <br>
+        <h3 class='admin-tools-text'>Admin Tools</h3>
+        <div class='login-box'>
+            <h2 class='h2 welcome'>Welcome Back!</h2>
+            <p class='par login-par'>Please enter your password and click login in to continue.</p>
+            
+            <form class='login-form' method="POST">
+                {% csrf_token %}
+                <div>
+                    <label for="username" class="labels">User:</label>
+                    <input type="input" class="inp username form-control" name="username" id="inputEmail" placeholder="Username" required >
+                </div>
+                <div>
+                    <label for="password" class="labels">Password:</label>
+                    <input type="password" class="inp password form-control" name="password" id="inputPass" placeholder="Password" required>
+                </div>
+                <button class='btn' type="submit" style="opacity: 1 !important;">Log In</button>
+                {% if messages %}
+                    <ul class="messages">
+                        {% for message in messages %}
+                            <li{% if message.tags %} class="{{ message.tags }}"{% endif %}>{{ message }}</li>
+                        {% endfor %}
+                    </ul>
+                {% endif %}
+              </form>
+        </div>
+    </div>
+
+
+</body>
+</html>

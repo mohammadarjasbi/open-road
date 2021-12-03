@@ -1,0 +1,47 @@
+
+{% extends 'main-page/base.html' %}
+{% load static %}
+
+{% block title %}The Open Road{% endblock title %}
+
+{% block content %}
+<div class="header">
+    <img src="/static/main-page/assets/logo.png" class='logo' alt="Logo">
+    <p class='user-data'>Logged in as: <a href="" class='prof-link'>{{user.username}}</a> </p>
+    <a href="{% url 'logout' %}" class='log-out'>Log Out</a>
+</div>
+
+<div class='table-row'>
+
+    <div name='ctg' class="btn-group">
+        <p class='lb'>Categories</p>
+        <button>All</button>
+        <button>Forgeries</button>
+        <button>Weed</button>
+        <button>Counterfeit Cash</button>
+        <button>Methamphetamine</button>
+        <button>Cocaine</button>
+    </div>
+
+
+  </div>
+
+
+
+<div class='grid'>
+  <div class="row">
+    
+  {%if queryset %}
+    {% for item in queryset %}
+      <div class="column" style="background-color:#aaa;">
+        <img class='product' src="/media/{{item.photo}}">
+        <p>{{item.name}}</p>
+      </div>
+    {% endfor %}
+
+  {% endif %}
+    
+  </div>
+</div>
+
+{% endblock content %}
